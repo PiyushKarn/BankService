@@ -4,6 +4,7 @@ package com.secod.service.Services;
 import com.secod.service.Domain.BankDomain;
 import com.secod.service.Repositories.BankRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -22,8 +23,28 @@ public class BankServiceImpl implements BankService{
 
     @Override
     public String saveAccount(BankDomain accountData) {
-        bankRepository.save(accountData);
-        return "Account Saved";
+//        bankRepository.save(accountData);
+//        return "Account Saved";
+
+//        BankDomain existingUser = bankRepository.findById(accountData.getId()).orElse(null);
+//        if  (existingUser != null){
+//            return "User already exists!!";
+//        }
+//        else {
+//            bankRepository.save(accountData);
+//            return "Account saved!!";
+//        }
+
+
+        try {
+            bankRepository.save(accountData);
+            return "Account added successfully";
+
+        } catch (DataIntegrityViolationException e) {
+            System.out.println("Duplicate entry!!");
+        }
+        return "Duplicate entry!!";
+
     }
 
     @Override

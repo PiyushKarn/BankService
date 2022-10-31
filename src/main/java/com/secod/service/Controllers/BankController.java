@@ -16,18 +16,18 @@ public class BankController {
     @Autowired
     private BankService bankServices;
 
-    @GetMapping("/") //getAllAccounts
+    @GetMapping() //getAllAccounts
     public List<BankDomain> allAccounts() {
         return bankServices.findAll();
 
     }
 
-    @PostMapping("/")  //AddNewAccount
+    @PostMapping()  //AddNewAccount
     public String addAccount(@RequestBody BankDomain accountData) {
         return bankServices.saveAccount(accountData);
     }
 
-    @PutMapping("/")   //updateExistingAccount
+    @PutMapping()   //updateExistingAccount
     public String updateUser(@RequestBody BankDomain newAccountData) {
         return bankServices.updateAccount(newAccountData);
     }
@@ -41,7 +41,7 @@ public class BankController {
     }
 
 
-    @DeleteMapping("/")       //deleteUserById
+    @DeleteMapping()       //deleteUserById
     public String deleteUser(@RequestBody BankDomain deleteAccountData) {
         return bankServices.deleteAccount(deleteAccountData);
     }
